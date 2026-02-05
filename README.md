@@ -8,13 +8,14 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 
 ## 🚀 Características
 
-- 🔍 Enumeración pasiva de información (headers, TLS, DNS, metadata)
-- ⚔️ Pruebas activas controladas:
+- 🔍 Enumeración pasiva de información (headers, TLS, DNS, Detector de CMS, Detector de Librerias, Enumeración de Directorios, Detector de BD, Detector de WAF ,metadata)
+- ⚔️ Pruebas activas controladas: **Aun en Desarrollo**
   - SQL Injection (error-based y blind/time-based)
   - Análisis de tiempos de respuesta
   - Detección de errores comunes de backend
 - 📊 Visualización de resultados (gráficas con `matplotlib`)
 - 🧪 Generación de tráfico realista (User-Agents y datos con `faker`)
+- 👤 Registros de usuarios falsos
 - 🧱 Diseño modular y extensible
 - 📄 Reportes claros para auditoría técnica
 
@@ -28,3 +29,7 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 ### Dependencias externas
 ```bash
 pip install requests matplotlib numpy faker
+
+Pueden tambien ejecutar el siguiente comando para la instalación de las dependencias de forma automatica.
+```bash
+pip install -r requirements.txt
