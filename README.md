@@ -1,4 +1,4 @@
-<img src="" >
+<img src="https://github.com/Rguezpjm/CaribeShield/blob/main/logo.png?raw=true" align="center">
 # 🛡️ CaribeShield
 **Passive & Active Web Posture Checker**
 CaribeShield es una herramienta de **evaluación de postura de seguridad web** que combina técnicas **pasivas y activas** para identificar configuraciones inseguras, superficies de ataque expuestas y vulnerabilidades comunes en aplicaciones y servicios web.
