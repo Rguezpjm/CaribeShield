@@ -8,7 +8,16 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 
 ## 🚀 Características
 
-- 🔍 Enumeración pasiva de información (headers, TLS, DNS, Detector de CMS, Detector de Librerias, Enumeración de Directorios, Detector de BD, Detector de WAF ,metadata)
+- 🔍 Enumeración pasiva de información
+  - Headers HTTP
+  - TLS / SSL
+  - DNS
+  - Detección de CMS
+  - Detección de librerías
+  - Enumeración de directorios
+  - Detección de bases de datos
+  - Detección de WAF
+  - Metadata
 - ⚔️ Pruebas activas controladas: **Aun en Desarrollo**
   - SQL Injection (error-based y blind/time-based)
   - Análisis de tiempos de respuesta
@@ -27,21 +36,25 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 - Sistema operativo: Linux / macOS / Windows
 
 ### Dependencias externas
-```bash
+```
 pip install requests matplotlib numpy faker
-
+```
 Pueden tambien ejecutar el siguiente comando para la instalación de las dependencias de forma automatica.
-
-```bash
+```
 pip install -r requirements.txt
-
+```
+--- 
 ### Instalacion
-```bash
+```
     git clone https://github.com/tuusuario/CaribeShield.git
     cd CaribeShield
     python3 -m pip install -r requirements.txt
     chmod +x caribeshield.py
-
+```
 ### Modo de uso
+```
+  ./caribeshield.py --> Windows
+   python3 caribeshield.py --> Linux & Mac
+```
 ./caribeshield.py  --> Windows
 python3 caribeshield.py --> Linux & Mac
