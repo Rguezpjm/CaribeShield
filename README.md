@@ -28,8 +28,20 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 
 ### Dependencias externas
 ```bash
-pip install requests matplotlib numpy faker bash```
+pip install requests matplotlib numpy faker
 
 Pueden tambien ejecutar el siguiente comando para la instalación de las dependencias de forma automatica.
+
 ```bash
-pip install -r requirements.txt ```
+pip install -r requirements.txt
+
+### Instalacion
+```bash
+    git clone https://github.com/tuusuario/CaribeShield.git
+    cd CaribeShield
+    python3 -m pip install -r requirements.txt
+    chmod +x caribeshield.py
+
+### Modo de uso
+./caribeshield.py  --> Windows
+python3 caribeshield.py --> Linux & Mac
