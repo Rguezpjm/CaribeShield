@@ -1,5 +1,30 @@
-# CaribeShield
-<bold>Esta herramienta es SOLO para auditorías con autorización expresa. El uso no autorizado
-podría constituir una infracción o delito bajo la Ley 53-07 (Crímenes y Delitos de Alta Tecnología)
-y puede involucrar manejo de datos personales regulados por la Ley 172-13 (Protección de Datos).
-Use bajo consentimiento y alcance definido.</bold>
+# 🛡️ CaribeShield
+**Passive & Active Web Posture Checker**
+CaribeShield es una herramienta de **evaluación de postura de seguridad web** que combina técnicas **pasivas y activas** para identificar configuraciones inseguras, superficies de ataque expuestas y vulnerabilidades comunes en aplicaciones y servicios web.
+
+Está pensada para **pentesting autorizado**, auditorías internas, hardening y análisis defensivo.
+
+---
+
+## 🚀 Características
+
+- 🔍 Enumeración pasiva de información (headers, TLS, DNS, metadata)
+- ⚔️ Pruebas activas controladas:
+  - SQL Injection (error-based y blind/time-based)
+  - Análisis de tiempos de respuesta
+  - Detección de errores comunes de backend
+- 📊 Visualización de resultados (gráficas con `matplotlib`)
+- 🧪 Generación de tráfico realista (User-Agents y datos con `faker`)
+- 🧱 Diseño modular y extensible
+- 📄 Reportes claros para auditoría técnica
+
+---
+
+## 🧰 Requisitos
+
+- Python **3.9+**
+- Sistema operativo: Linux / macOS / Windows
+
+### Dependencias externas
+```bash
+pip install requests matplotlib numpy faker
