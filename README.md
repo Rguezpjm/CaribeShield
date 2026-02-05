@@ -28,7 +28,7 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
 
 ### Dependencias externas
 ```bash
-pip install requests matplotlib numpy faker ```
+pip install requests matplotlib numpy faker bash```
 
 Pueden tambien ejecutar el siguiente comando para la instalación de las dependencias de forma automatica.
 ```bash
