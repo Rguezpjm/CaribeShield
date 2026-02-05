@@ -56,5 +56,3 @@ pip install -r requirements.txt
   ./caribeshield.py --> Windows
    python3 caribeshield.py --> Linux & Mac
 ```
-./caribeshield.py  --> Windows
-python3 caribeshield.py --> Linux & Mac
