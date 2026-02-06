@@ -20,8 +20,11 @@ Está pensada para **pentesting autorizado**, auditorías internas, hardening y 
   - Detección de bases de datos
   - Detección de WAF
   - Metadata
+  - Enumeración de Subdominios
 - ⚔️ Pruebas activas controladas: **Aun en Desarrollo**
   - SQL Injection (error-based y blind/time-based)
+  - Fuerza Bruta a usuarios encontrados
+  - XSS Reflected
   - Análisis de tiempos de respuesta
   - Detección de errores comunes de backend
 - 📊 Visualización de resultados (gráficas con `matplotlib`)
