@@ -905,6 +905,52 @@ def progress(i, total, width=30):
     bar = "=" * filled + "." * (width - filled)
     print(f"\r[{bar}] {i}/{total}", end="", flush=True)
 
+
+def subdomain_finder(domain: str, timeout=12, max_names=300):
+    domain = (domain or "").strip().lower()
+    domain = domain.replace("http://", "").replace("https://", "").strip("/")
+    if not domain:
+        return []
+    try:
+        q = f"https://crt.sh/?q=%25.{domain}&output=json"
+        r = requests.get(q, timeout=timeout, headers={"User-Agent": "CaribeShield/2.0 (crt.sh)"})
+        if r.status_code != 200:
+            return []
+        data = r.json()
+    except Exception:
+        return []
+    names = set()
+    for row in data:
+        nameval = (row.get("name_value") or "").strip()
+        if not nameval:
+            continue
+        for n in nameval.splitlines():
+            n = n.strip().lower().strip(".")
+            if not n or n.startswith("*."):
+                continue
+            if n == domain or n.endswith("." + domain):
+                names.add(n)
+    out = sorted(names)
+    return out[:max(0, int(max_names))]
+
+def root_domain_from_host(host: str) -> str:
+    h = (host or "").strip(".").lower()
+    if not h:
+        return ""
+    ext = tldextract.extract(h)  
+    if not ext.domain or not ext.suffix:
+        return h
+    return f"{ext.domain}.{ext.suffix}"
+
+def subdomains_live(domain: str, timeout=12, max_names=300):
+    subs = subdomain_finder(domain, timeout=timeout, max_names=max_names)
+    live = []
+    for s in subs:
+        ips = dns_resolve(s)
+        if ips:
+            live.append((s, ips))
+    return live
+
 def base_origin(final_url: str):
     p = urlparse(final_url)
     return f"{p.scheme}://{p.netloc}"
@@ -947,14 +993,66 @@ def main():
     print_kv("IPs resueltas", ", ".join(ips) if ips else "No disponible")
 
     if not args.no_ports:
-        print("\n[+] Chequeo conectividad TCP (Comunes)...")
+        print("\n[+] Escaneando Puertos...")
         p80 = tcp_connect(host, 80)
         p443 = tcp_connect(host, 443)
+        p20 = tcp_connect(host, 20)
         p21 = tcp_connect(host, 21)
+        p22 = tcp_connect(host, 22)
+        p8080 = tcp_connect(host, 8080)
+        p8443 = tcp_connect(host, 8443)
+        p9200 = tcp_connect(host, 9200)
+        p27017 = tcp_connect(host, 27017)
+        p6379 = tcp_connect(host, 6379)
+        p5900 = tcp_connect(host, 5900)
+        p5432 = tcp_connect(host, 5432)
+        p3389 = tcp_connect(host, 3389)
+        p3306 = tcp_connect(host, 3306)
+        p2376 = tcp_connect(host, 2376)
+        p2375 = tcp_connect(host, 2375)
+        p2049 = tcp_connect(host, 2049)
+        p1521 = tcp_connect(host, 1521)
+        p1433 = tcp_connect(host, 1433)
+        p995 = tcp_connect(host, 995)
+        p993 = tcp_connect(host, 993)
+        p873 = tcp_connect(host, 873)
+        p636 = tcp_connect(host, 636)
+        p587 = tcp_connect(host, 587)
+        p500 = tcp_connect(host, 500)
+        p465 = tcp_connect(host, 465)
+        p445 = tcp_connect(host, 445)
+        p389 = tcp_connect(host, 389)
+        p162 = tcp_connect(host, 162)
         open_ports = []
         if p80: open_ports.append("80")
         if p443: open_ports.append("443")
         if p21: open_ports.append("21")
+        if p22: open_ports.append("22")
+        if p20: open_ports.append("20")
+        if p8080: open_ports.append("8080")
+        if p8443: open_ports.append("8443")
+        if p9200: open_ports.append("9200")
+        if p27017: open_ports.append("27017")
+        if p6379: open_ports.append("6379")
+        if p5900: open_ports.append("5900")
+        if p5432: open_ports.append("5432")
+        if p3389: open_ports.append("3389")
+        if p3306: open_ports.append("3306")
+        if p2376: open_ports.append("2376")
+        if p2375: open_ports.append("2375")
+        if p2049: open_ports.append("2049")
+        if p1521: open_ports.append("1521")
+        if p1433: open_ports.append("1433")
+        if p995: open_ports.append("995")
+        if p993: open_ports.append("993")
+        if p873: open_ports.append("873")
+        if p636: open_ports.append("636")
+        if p587: open_ports.append("587")
+        if p500: open_ports.append("500")
+        if p465: open_ports.append("465")
+        if p445: open_ports.append("445")
+        if p389: open_ports.append("389")
+        if p162: open_ports.append("162")
         print_kv("Puertos accesibles", ", ".join(open_ports) if open_ports else "Ninguno/Filtrado")
 
     print("\n[+] Consultando sitio (GET)...")
@@ -1081,7 +1179,20 @@ def main():
             if len(s) > 160:
                 s = s[:160] + "..."
             print(f"  - {key}: {s}")
-
+            
+    print("\n===== ENUMERANDO LOS SUBDOMINIOS =====")
+    base_dom = root_domain_from_host(host)   
+    subs_live = subdomains_live(base_dom, timeout=args.timeout, max_names=300)
+    if not subs_live:
+        print_kv("Subdominios", "No encontrados / No resuelven DNS")
+    else:
+        print_kv("crt.sh subdominios (raw)", len(subdomain_finder(base_dom)))
+        print_kv("Dominio base", base_dom)
+        for sub, ips_sub in subs_live[:80]:
+            print(f"  - {sub:<35} -> {', '.join(ips_sub)}")
+        if len(subs_live) > 80:
+            print("  - ...")
+            
     print("\n===== WPCRON =====")
     verificar_wpcron(origin, timeout=args.timeout)
     print("\n===== XMLRPC =====")
