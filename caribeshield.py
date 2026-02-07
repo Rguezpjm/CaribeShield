@@ -22,6 +22,7 @@ import threading
 import random
 import time
 import json
+import tldextract
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import numpy as np
