@@ -1,4 +1,4 @@
-<img src="https://github.com/Rguezpjm/CaribeShield/blob/main/logo.png?raw=true" align="center">
+<img src="https://github.com/Rguezpjm/CaribeShield/blob/main/logo.png?raw=true" align="center" height="40">
 
 ## 🛡️ CaribeShield
 **Passive & Active Web Posture Checker**
